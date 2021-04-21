@@ -3,61 +3,98 @@ const  morgan = require('morgan');
 
 const app = express();
 
-let topMovies = [
+let movies = [
     {
         title: 'Cool Runnings',
         director: 'Jon Turteltaub',
-        cast: ['John Candy', 'Leon', 'Doug E. Doug']
+        cast: ['John Candy', 'Leon', 'Doug E. Doug'],
+        genre: ['Adventure', 'Comedy', 'Family'],
+        description: 'When a Jamaican sprinter is disqualified from the Olympic Games, he enlists the help of a dishonored coach to start the first Jamaican Bobsled Team.',
+        image: 'https://m.media-amazon.com/images/M/MV5BMjMxMTQ3MzMwMV5BMl5BanBnXkFtZTgwNTYxNzYxMTE@._V1_UX182_CR0,0,182,268_AL_.jpg'
+
     },
     {
         title: 'Boyhood',
         director: 'RichardLinklater',
-        cast: ['Ellar Coltrane', 'Patricia Arquette', 'Ethan Hawke']
+        cast: ['Ellar Coltrane', 'Patricia Arquette', 'Ethan Hawke'],
+        genre: 'Drama',
+        description: 'The life of Mason, from early childhood to his arrival at college.',
+        image: 'https://m.media-amazon.com/images/M/MV5BMTYzNDc2MDc0N15BMl5BanBnXkFtZTgwOTcwMDQ5MTE@._V1_UX182_CR0,0,182,268_AL_.jpg'
     },
     {
         title: 'Seven',
         director: 'David Fincher',
-        cast: ['Morgan Freeman', 'Brad Pitt', 'Kevin Spacey']
+        cast: ['Morgan Freeman', 'Brad Pitt', 'Kevin Spacey'],
+        genre: ['Crime', 'Drama', 'Mystery'],
+        description: 'Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his motives.',
+        image: 'https://m.media-amazon.com/images/M/MV5BOTUwODM5MTctZjczMi00OTk4LTg3NWUtNmVhMTAzNTNjYjcyXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_UX182_CR0,0,182,268_AL_.jpg'
     },
     {
         title: 'Casablanca',
         director: 'Michael Curtiz',
-        cast: ['Humphrey Bogart', 'Ingrid Bergman', 'Paul Henreid']
+        cast: ['Humphrey Bogart', 'Ingrid Bergman', 'Paul Henreid'],
+        genre: ['Drama', 'Romance', 'War'],
+        description: 'A cynical expatriate American cafe owner struggles to decide whether or not to help his former lover and her fugitive husband escape the Nazis in French Morocco.',
+        image: 'https://m.media-amazon.com/images/M/MV5BY2IzZGY2YmEtYzljNS00NTM5LTgwMzUtMzM1NjQ4NGI0OTk0XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_UX182_CR0,0,182,268_AL_.jpg'
     },
     {
         title: 'Across the Universe',
         director: 'Julie Taymor',
-        cast: ['Evan Rachel Wood', 'Jim Sturgess', 'Joe Anderson']
+        cast: ['Evan Rachel Wood', 'Jim Sturgess', 'Joe Anderson'],
+        genre: ['Drama', 'Fantasy', 'History'],
+        description: 'The music of The Beatles and the Vietnam War form the backdrop for the romance between an upper-class American girl and a poor Liverpudlian artist.',
+        image: 'https://m.media-amazon.com/images/M/MV5BMTIyMTUwNzg3Nl5BMl5BanBnXkFtZTcwMjM1MDI1MQ@@._V1_UX182_CR0,0,182,268_AL_.jpg'
+
     },
     {
         title: 'The Good, The Bad and the Ugly',
         director: 'Sergio Leone',
-        cast: ['Clint Eastwood', 'Eli Wallach', 'Lee Van Cleef']
+        cast: ['Clint Eastwood', 'Eli Wallach', 'Lee Van Cleef'],
+        genre: 'Western',
+        description: 'A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.',
+        image: 'https://m.media-amazon.com/images/M/MV5BOTQ5NDI3MTI4MF5BMl5BanBnXkFtZTgwNDQ4ODE5MDE@._V1_UX182_CR0,0,182,268_AL_.jpg'
     },
     {
         title: 'The Shawshank Redemption',
         director: 'Frank Darabont',
-        cast: ['Tim Robbins', 'Morgan Freeman', 'Bob Gunton']
+        cast: ['Tim Robbins', 'Morgan Freeman', 'Bob Gunton'],
+        genre: 'Drama',
+        description: 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
+        image: 'https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX182_CR0,0,182,268_AL_.jpg'
     },
     {
         title: 'Arsenic and Old Lace',
         director: 'Frank Capra',
-        cast: ['Cary Grant', 'Priscilla Lane', 'Raymond Massey']
+        cast: ['Cary Grant', 'Priscilla Lane', 'Raymond Massey'],
+        genre: ['Comedy', 'Crime', 'Thriller'],
+        description: 'A writer of books on the futility of marriage risks his reputation when he decides to get married. Things get even more complicated when he learns on his wedding day that his beloved maiden aunts are habitual murderers.',
+        image: 'https://m.media-amazon.com/images/M/MV5BZDVlNTBjMjctNjAzNS00ZGJhLTg2NzMtNzIwYTIzYTBiMDkyXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_UX182_CR0,0,182,268_AL_.jpg'
     },
     {
         title: 'Almost Famous',
         director: 'Cameron Crowe',
-        cast: ['Billy Crudup', 'Patrick Fugit', 'Kate Hudson']
+        cast: ['Billy Crudup', 'Patrick Fugit', 'Kate Hudson'],
+        genre: ['Adventure', 'Comedy', 'Drama'],
+        description: 'A high-school boy is given the chance to write a story for Rolling Stone Magazine about an up-and-coming rock band as he accompanies them on their concert tour.',
+        image: 'https://m.media-amazon.com/images/M/MV5BMzY1ZjMwMGEtYTY1ZS00ZDllLTk0ZmUtYzA3ZTA4NmYwNGNkXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_UX182_CR0,0,182,268_AL_.jpg'
     },
     {
         title: 'That Thing You Do',
         director: 'Tom Hanks',
-        cast: ['Tom Hanks', 'Liv Tyler', 'Carleze Theron']
+        cast: ['Tom Hanks', 'Liv Tyler', 'Carleze Theron'],
+        genre: ['Comedy', 'Drama', 'Music'],
+        description: 'A local Pennsylvania band scores a one-hit wonder in 1964 and rides the star-making machinery as long as they can, with lots of help from their manager.',
+        image: 'https://m.media-amazon.com/images/M/MV5BOWVmN2ZhZjgtZGEzMy00NDkxLWI5YWQtYTE2ZTk0YzIyMzc0XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_UX182_CR0,0,182,268_AL_.jpg'
     }
 ];
 
 app.use(morgan('common'));
 app.use(express.static('public'));
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 
 // GET requests
 app.get('/', (req, res) => {
@@ -68,14 +105,64 @@ app.get('/documentation', (req, res) => {
     res.sendFile('public/documentation.html', {root: __dirname});
 });
 
+// Gets the list of data about all movies
 app.get('/movies', (req, res) => {
-    res.json(topMovies);
+    res.json(movies);
 });
 
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+// Return data about single movie
+app.get('/movies/:title', (req, res) => {
+    res.json(movies.find((movie) => 
+    { return movie.title === req.params.title}));
 });
+
+// Return data about a genre by title
+app.get('/movies/genre/:title', (req, res) => {
+    res.send('Successful get request')
+});
+
+// Returns data about a director by name
+app.get('/movies/:director', (req, res) => {
+    // res.json(movies.find((movie) => 
+    // { return movie.director === req.params.director} ));
+    res.send('Successful get request')
+});
+
+// Allows new users to register
+app.post('/movies/users/register', (req, res) => {
+    res.send('Successful post request to register new user');
+});
+
+// Allows user to update their user info
+app.put('/users/:username/:change', (req, res) => {
+    res.send('Successful PUT request updating username.');
+});
+
+// Allows users to add move to their list of favorites
+app.post('/movies/users/fav/:movie', (req, res) => {
+       res.send('Successful POST request')
+        // let newMovie = req.body;
+
+        // if (!newMovie.title) {
+        //     const message = 'Missing title in request body';
+        //     res.status(400).send(message);
+        // } else {
+        //     movies.push(newMovie);
+        //     res.status(201).send(newMovie);
+        //     app.send('Successful post request to add movie')
+        // }
+    });
+
+// Removes movie from favorite list
+app.delete('/movies/:user/fav/:movie', (req, res) => {
+    res.send('Successful delete request')
+});
+
+// Allow users to deregister
+app.delete('/users/:username', (req, res) => {
+    res.send('Successful delete request')
+});
+
 
 app.listen(8080, () => {
 console.log('My first Node test server is running on Port 8080.');
