@@ -64,7 +64,7 @@
             </tr>
             <tr>
                 <td>Allow new users to register</td>
-                <td>/users/register</td>
+                <td>/users</td>
                 <td>POST</td>
                 <td>None</td>
                 <td></td>
@@ -72,7 +72,7 @@
             </tr>
             <tr>
                 <td>Allow users to update their user info (username)</td>
-                <td>/users/[username]/change</td>
+                <td>/users/[username]</td>
                 <td>PUT</td>
                 <td>Username</td>
                 <td>None</td>
@@ -80,7 +80,7 @@
             </tr>
             <tr>
                 <td>Allow users to add a movie to their list of favorites</td>
-                <td>/movies/users/fav/[movie]</td>
+                <td>/users/[movie]</td>
                 <td>POST</td>
                 <td>Movie</td>
                 <td>A JSON object holding data about the movie to add, structed like: <br>
@@ -97,7 +97,7 @@
             </tr>
             <tr>
                 <td>Allow users to remove a movie from their list of favorites</td>
-                <td>/movies/[user]/fav/[movie]</td>
+                <td>/[user]/[movie]</td>
                 <td>DELETE</td>
                 <td>User, Movie</td>
                 <td>None</td>
@@ -105,15 +105,14 @@
             </tr>
             <tr>
                 <td>Allow existing users to deregister</td>
-                <td>/users/[username]</td>
+                <td>/users</td>
                 <td>DELETE</td>
                 <td>username</td>
                 <td>None</td>
                 <td>A text message saying whether the user was successfully deregistered.</td>
             </tr>
         </table>
-    
+
     </body>
 
 </html>
-

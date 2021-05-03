@@ -1,7 +1,17 @@
 const express = require('express');
-const  morgan = require('morgan');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const uuid = require('uuid');
+const Models = reqire('./models.js');
+
+const Movies = Models.Movie;
+const Users = Models.User;
 
 const app = express();
+app.use(bodyParser.json());
+
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true});
 
 let movies = [
     {
@@ -112,7 +122,7 @@ app.get('/movies', (req, res) => {
 
 // Return data about single movie
 app.get('/movies/:title', (req, res) => {
-    res.json(movies.find((movie) => 
+    res.json(movies.find((movie) =>
     { return movie.title === req.params.title}));
 });
 
@@ -123,23 +133,53 @@ app.get('/movies/genre/:title', (req, res) => {
 
 // Returns data about a director by name
 app.get('/movies/:director', (req, res) => {
-    // res.json(movies.find((movie) => 
+    // res.json(movies.find((movie) =>
     // { return movie.director === req.params.director} ));
     res.send('Successful get request')
 });
 
 // Allows new users to register
-app.post('/movies/users/register', (req, res) => {
-    res.send('Successful post request to register new user');
+/* We'll expect JSON in this information{
+  ID: Integer,
+  Username: String,
+  Password: String,
+  Email: String,
+  Birthday: Date
+}
+*/
+app.post('/users', (req, res) => {
+    // Users.findOne({ Username: req.body.Username })
+    // .then((user) => {
+    //   if (user) {
+    //     return res.status(400).send(req.body.Username + ' already exists');
+    //   } else {
+    //       Users
+    //         .create({
+    //           Username: req.body.Username,
+    //           Password: req.body.Password,
+    //           Email: req.body.Email,
+    //           Birthday: req.body.Birthday
+    //         })
+    //         .then((user) => { res.status(201).json(user) })
+    //       .catch((error) => {
+    //         console.error(error);
+    //         req.status(500).send('Error: ' + error);
+    //       })
+    //   }
+    // })
+    // .catch((error) => {
+    //   console.error(error);
+    //   res.status(500).send('Error: ' + error);
+    // });
 });
 
 // Allows user to update their user info
-app.put('/users/:username/:change', (req, res) => {
+app.put('/users/:username/', (req, res) => {
     res.send('Successful PUT request updating username.');
 });
 
 // Allows users to add move to their list of favorites
-app.post('/movies/users/fav/:movie', (req, res) => {
+app.post('/movies/users/:movie', (req, res) => {
        res.send('Successful POST request')
         // let newMovie = req.body;
 
@@ -154,7 +194,7 @@ app.post('/movies/users/fav/:movie', (req, res) => {
     });
 
 // Removes movie from favorite list
-app.delete('/movies/:user/fav/:movie', (req, res) => {
+app.delete('/movies/:user/:movie', (req, res) => {
     res.send('Successful delete request')
 });
 
