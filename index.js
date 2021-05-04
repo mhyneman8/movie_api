@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const uuid = require('uuid');
-const Models = reqire('./models.js');
+const Models = require('./models.js');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -148,29 +148,29 @@ app.get('/movies/:director', (req, res) => {
 }
 */
 app.post('/users', (req, res) => {
-    // Users.findOne({ Username: req.body.Username })
-    // .then((user) => {
-    //   if (user) {
-    //     return res.status(400).send(req.body.Username + ' already exists');
-    //   } else {
-    //       Users
-    //         .create({
-    //           Username: req.body.Username,
-    //           Password: req.body.Password,
-    //           Email: req.body.Email,
-    //           Birthday: req.body.Birthday
-    //         })
-    //         .then((user) => { res.status(201).json(user) })
-    //       .catch((error) => {
-    //         console.error(error);
-    //         req.status(500).send('Error: ' + error);
-    //       })
-    //   }
-    // })
-    // .catch((error) => {
-    //   console.error(error);
-    //   res.status(500).send('Error: ' + error);
-    // });
+    Users.findOne({ Username: req.body.Username })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + ' already exists');
+      } else {
+          Users
+            .create({
+              Username: req.body.Username,
+              Password: req.body.Password,
+              Email: req.body.Email,
+              Birthday: req.body.Birthday
+            })
+            .then((user) => { res.status(201).json(user) })
+          .catch((error) => {
+            console.error(error);
+            req.status(500).send('Error: ' + error);
+          })
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
 });
 
 // Allows user to update their user info
