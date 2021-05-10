@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true});
 
-let movies = [
+let movie = [
     {
         title: 'Cool Runnings',
         director: 'Jon Turteltaub',
@@ -117,25 +117,51 @@ app.get('/documentation', (req, res) => {
 
 // Gets the list of data about all movies
 app.get('/movies', (req, res) => {
-    res.json(movies);
+    Movies.find()
+    .then((movies) => {
+        res.status(201).json(movies);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 // Return data about single movie
 app.get('/movies/:title', (req, res) => {
-    res.json(movies.find((movie) =>
-    { return movie.title === req.params.title}));
+    Movies.findOne({ 'Title': req.params.title})
+    .then((movies) => {
+        res.status(201).json(movies);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 // Return data about a genre by title
-app.get('/movies/genre/:title', (req, res) => {
-    res.send('Successful get request')
+app.get('/movies/genre/:Name', (req, res) => {
+    Movies.findOne({ 'Genre.Name': req.params.Name})
+    .then((movies) => {
+        res.json(movies.Genre);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 // Returns data about a director by name
 app.get('/movies/:director', (req, res) => {
-    // res.json(movies.find((movie) =>
-    // { return movie.director === req.params.director} ));
-    res.send('Successful get request')
+   res.send(Success);
+    // Movies.findOne({ 'Director.Name': req.params.Name })
+    // .then((movies) => {
+    //     res.json(movies.Director);
+    // })
+    // .catch((err) => {
+    //     console.error(err);
+    //     res.status(500).send('Error: ' + err);
+    // });
 });
 
 // Allows new users to register
@@ -205,7 +231,7 @@ app.put('/users/:Username', (req, res) => {
             Username: req.body.Username,
             Password: req.body.Password,
             Email: req.body.Email,
-            Birthday: req.body.Birthday
+            BirthDate: req.body.BirthDate
         }
     },
     { new: true }, // This line makes sure that the updated document is returned
