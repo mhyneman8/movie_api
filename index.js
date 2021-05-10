@@ -152,16 +152,15 @@ app.get('/movies/genre/:Name', (req, res) => {
 });
 
 // Returns data about a director by name
-app.get('/movies/:director', (req, res) => {
-   res.send(Success);
-    // Movies.findOne({ 'Director.Name': req.params.Name })
-    // .then((movies) => {
-    //     res.json(movies.Director);
-    // })
-    // .catch((err) => {
-    //     console.error(err);
-    //     res.status(500).send('Error: ' + err);
-    // });
+app.get('/movies/director/:Name', (req, res) => {
+    Movies.findOne({ 'Director.Name': req.params.Name })
+    .then((movies) => {
+        res.json(movies.Director);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 // Allows new users to register
