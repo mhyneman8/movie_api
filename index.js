@@ -141,9 +141,9 @@ app.get('/movies/:title', (req, res) => {
 
 // Return data about a genre by title
 app.get('/movies/genre/:Name', (req, res) => {
-    Movies.findOne({ 'Genre.Name': req.params.Name})
-    .then((movies) => {
-        res.json(movies.Genre);
+    Movies.findOne({ 'genre.name': req.params.Name})
+    .then((movie) => {
+        res.json(movie.Genre);
     })
     .catch((err) => {
         console.error(err);
@@ -178,23 +178,22 @@ app.post('/users', (req, res) => {
       if (user) {
         return res.status(400).send(req.body.Username + ' already exists');
       } else {
-          Users
-            .create({
+          Users.create({
               Username: req.body.Username,
               Password: req.body.Password,
               Email: req.body.Email,
               BirthDate: req.body.BirthDate
             })
             .then((user) => { res.status(201).json(user) })
-          .catch((error) => {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
+          .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
           })
       }
     })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send('Error: ' + error);
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
     });
 });
 
@@ -261,7 +260,7 @@ app.post('/users/:Username/Movies/:MovieID', (req, res) => {
     });
 
 // Removes movie from favorite list
-app.post('/users/:Username/Movies/:MovieID', (req, res) => {
+app.post('/users/:Username/Movies/remove/:MovieID', (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, {
         $pull: { FavoriteMovies: req.params.MovieID }
     },

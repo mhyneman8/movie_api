@@ -27,13 +27,22 @@
                 <td>GET</td>
                 <td>None</td>
                 <td>None</td>
-                <td>A JSON holding data about all the movies</td>
+                <td>A JSON holding data about all the movies <br>
+                    { <br>
+                        title: , <br>
+                        genre: , <br>
+                        director: , <br>
+                        description: , <br>
+                        image URL: , <br>
+                        featured:  <br>
+                        }
+                </td>
             </tr>
             <tr>
                 <td>Return data (description, genre, director, image URL, whether it's featured or not) about a single movie by title to the user</td>
                 <td>/movies/[title]</td>
                 <td>GET</td>
-                <td>Title</td>
+                <td>:Title</td>
                 <td>None</td>
                 <td>A JSON object holding data about a single movie, containing a description, genre, director, image URL, and if it's featured. Ex: <br>
                     { <br>
@@ -48,66 +57,90 @@
             </tr>
             <tr>
                 <td>Return data about a genre (description) by name/title (e.g., "Thriller")</td>
-                <td>/movies/genre/[title]</td>
+                <td>/movies/genre/[name]</td>
                 <td>GET</td>
-                <td>Title</td>
+                <td>:name</td>
                 <td>None</td>
-                <td>A JSON object holding data about a genre, containing a description. </td>
+                <td>A JSON object holding data about a genre, containing a description. <br>
+                    { <br>
+                        Name: , <br>
+                        Description: , <br>
+                        }
+                </td>
             </tr>
             <tr>
                 <td>Return data about a director (bio, birth year, death year) by name</td>
-                <td>/movies/[director]</td>
+                <td>/movies/director/[name]</td>
                 <td>GET</td>
-                <td>Director</td>
+                <td>:name</td>
                 <td>None</td>
-                <td>A JSON object holding data about a director, containing bio, birth year, and death year.</td>
+                <td>A JSON object holding data about a director, containing bio, birth year, and death year. <br>
+                    { <br>
+                        Name: , <br>
+                        Bio: , <br>
+                        Birth year: , <br>
+                        Death year: , <br>
+                        }
+                </td>
             </tr>
             <tr>
                 <td>Allow new users to register</td>
                 <td>/users</td>
                 <td>POST</td>
                 <td>None</td>
-                <td></td>
-                <td>A text message indicating the user has been registered.</td>
+                <td>A JSON object with user information.
+                    { <br>
+                        Username: , <br>
+                        Password: , <br>
+                        Email: , <br>
+                        BirthDate: , <br>
+                        }
+                </td>
+                <td>A text message indicating the user has been registered.<br>
+                    { <br>
+                        Username: , <br>
+                        Password: , <br>
+                        Email: , <br>
+                        BirthDate: , <br>
+                        }    
+                </td>
             </tr>
             <tr>
                 <td>Allow users to update their user info (username)</td>
                 <td>/users/[username]</td>
                 <td>PUT</td>
-                <td>Username</td>
-                <td>None</td>
-                <td>A text message indicating the username was updated</td>
+                <td>:Username</td>
+                <td>JSON object<br>
+                    { <br>
+                        Username: , <br>
+                        Password: , <br>
+                        Email: , <br>
+                        BirthDate: , <br>
+                        }
+                </td>
+                <td>A JSON object showing updated data</td>
             </tr>
             <tr>
                 <td>Allow users to add a movie to their list of favorites</td>
-                <td>/users/[movie]</td>
+                <td>/users/[username]/Movies/[movie]</td>
                 <td>POST</td>
-                <td>Movie</td>
-                <td>A JSON object holding data about the movie to add, structed like: <br>
-                    { <br>
-                    title: ,<br>
-                    genre: , <br>
-                    director: , <br>
-                    description: , <br>
-                    image URL: , <br>
-                    featured:  <br>
-                    }
-                </td>
+                <td>:Username, :Movie</td>
+                <td>Movie name</td>
                 <td>A text message saying whether the movie has been added.</td>
             </tr>
             <tr>
                 <td>Allow users to remove a movie from their list of favorites</td>
-                <td>/[user]/[movie]</td>
-                <td>DELETE</td>
-                <td>User, Movie</td>
+                <td>/users/[username]/Movies/remove/[movie]</td>
+                <td>POST</td>
+                <td>:Username, :Movie</td>
                 <td>None</td>
                 <td>A text message saying whether the movie was successfully removed</td>
             </tr>
             <tr>
                 <td>Allow existing users to deregister</td>
-                <td>/users</td>
+                <td>/users/[Username]</td>
                 <td>DELETE</td>
-                <td>username</td>
+                <td>:username</td>
                 <td>None</td>
                 <td>A text message saying whether the user was successfully deregistered.</td>
             </tr>
