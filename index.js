@@ -139,11 +139,11 @@ app.get('/movies/:title', (req, res) => {
     });
 });
 
-// Return data about a genre by title
+// Return data about a genre by name
 app.get('/movies/genre/:Name', (req, res) => {
-    Movies.findOne({ 'genre.name': req.params.Name})
-    .then((movie) => {
-        res.json(movie.Genre);
+    Movies.findOne({ 'Genre.Name': req.params.Name})
+    .then((movies) => {
+        res.json(movies.Genre);
     })
     .catch((err) => {
         console.error(err);
