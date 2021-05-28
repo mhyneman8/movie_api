@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 const cors = require('cors');
 // app.use(cors()); Allows from all origins
-
+let auth = require('./auth')(app);
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
 
 // change back to use(cors({
@@ -34,8 +34,6 @@ app.use(cors());
 //         return callback(null, true);
 //     }
 // }));
-
-let auth = require('./auth')(app);
 
 const passport = require('passport');
 require('./passport');
