@@ -1,27 +1,15 @@
 const express = require('express');
 const morgan = require('morgan');
+
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const uuid = require('uuid');
-const Models = require('./models.js');
-
-const Movies = Models.Movie;
-const Users = Models.User;
-
-// local database
-//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true});
-// online database
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-
-const { check, validationResult } = require('express-validator');
 
 const app = express();
 app.use(bodyParser.json());
 
+let auth = require('./auth')(app);
+
 const cors = require('cors');
 // app.use(cors()); Allows from all origins
-let auth = require('./auth')(app);
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
 
 // change back to use(cors({
 app.use(cors());
@@ -38,6 +26,20 @@ app.use(cors());
 const passport = require('passport');
 require('./passport');
 
+const { check, validationResult } = require('express-validator');
+
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+const Movies = Models.Movie;
+const Users = Models.User;
+
+// local database
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true});
+// online database
+// mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
 
 app.use(morgan('common'));
 app.use(express.static('public'));
@@ -153,7 +155,9 @@ app.post('/users',
     });
 
 // Gets all users
-app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/users', 
+// passport.authenticate('jwt', { session: false }), 
+(req, res) => {
     Users.find()
         .then((users) => {
             res.status(201).json(users);
