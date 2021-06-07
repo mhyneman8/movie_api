@@ -6,13 +6,14 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 
-let auth = require('./auth')(app);
+
 
 const cors = require('cors');
 // app.use(cors()); Allows from all origins
 
 // change back to use(cors({
 app.use(cors());
+// app.use(cors({
 //     origin: (origin, callback) => {
 //         if (!origin) return callback(null, true);
 //         if (allowedOrigins.indexOf(origin) === -1) {
@@ -39,7 +40,9 @@ const Users = Models.User;
 // online database
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
+let auth = require('./auth')(app);
+
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
 
 app.use(morgan('common'));
 app.use(express.static('public'));
@@ -59,7 +62,7 @@ app.get('/documentation', passport.authenticate('jwt', { session: false }), (req
 });
 
 // Gets the list of data about all movies
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
         .then((movies) => {
             res.status(201).json(movies);
