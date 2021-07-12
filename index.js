@@ -40,7 +40,7 @@ mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnified
 
 let auth = require('./auth')(app);
 
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://myflix-mh.netlify.app'];
 
 app.use(morgan('common'));
 app.use(express.static('public'));
