@@ -33,4 +33,19 @@ The server-side componenet of a 'movies' web applicatoin. This API stores inform
 
 [Documentation](https://myflix788.herokuapp.com/documentation)
 
+## Dependencies
+- bcrypt
+- body-parser
+- cors
+- express
+- express-validator
+- jsonwebtoken
+- lodash
+- mongoose
+- morgan
+- passport
+- passport-jwt
+- passport-local
+- uuid
+
   
