@@ -55,7 +55,9 @@ app.get('/', (req, res) => {
     res.send('Welcome to myFlix! Where you can keep track of all your favorite movies.');
 });
 
-app.get('/documentation', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/documentation',
+//  passport.authenticate('jwt', { session: false }), 
+ (req, res) => {
     res.sendFile('public/documentation.html', { root: __dirname });
 });
 
