@@ -1,0 +1,42 @@
+body {
+    margin: 20px;
+    text-align: center;
+    background-color: ghostwhite;
+}
+
+table {
+    table-layout: auto;
+    width: 90%;
+    border: 2px solid black;
+    margin: 40px auto;
+    padding: 15px;
+}
+
+th {
+    border-bottom: 2px solid black;
+}
+
+td {
+    padding: 10px 0;
+    border-bottom: 0.5px solid gray;
+}
+
+.center {
+    text-align: center;
+}
+.left {
+    text-align: left;
+}
+
+h1 {
+    font-size: 43px;
+    margin-top: 52px;
+}
+
+p {
+    width: 60%;
+    margin: 10px auto;
+    font-size: 18px;
+    text-align: left;
+}
+

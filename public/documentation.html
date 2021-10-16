@@ -3,9 +3,11 @@
     <head>
         <meta charset="utf-8">
         <title>Documentation</title>
+
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <h1>My Flicks</h1>
+        <h1 class="center">My Flicks API</h1>
 
         <p>This provides users with access to information aobut different movies, directors, and genres.
             Users will be able to sign up, update their personal information, and create a list of their favorite movies.
@@ -14,7 +16,7 @@
         <table>
             <tr>
                 <th>Business Logic</th>
-                <th>URL</th>
+                <th class="url">URL</th>
                 <th>HTTP Method</th>
                 <th>Query Parameters</th>
                 <th>Request body data format</th>
@@ -22,123 +24,177 @@
 
             </tr>
             <tr>
-                <td>Return a list of ALL movies to the user</td>
-                <td>/movies</td>
-                <td>GET</td>
-                <td>None</td>
-                <td>None</td>
-                <td>A JSON holding data about all the movies <br>
-                    { <br>
-                        title: , <br>
-                        genre: , <br>
-                        director: , <br>
-                        description: , <br>
-                        image URL: , <br>
-                        featured:  <br>
-                        }
-                </td>
-            </tr>
-            <tr>
-                <td>Return data (description, genre, director, image URL, whether it's featured or not) about a single movie by title to the user</td>
-                <td>/movies/[title]</td>
-                <td>GET</td>
-                <td>:Title</td>
-                <td>None</td>
-                <td>A JSON object holding data about a single movie, containing a description, genre, director, image URL, and if it's featured. Ex: <br>
-                    { <br>
-                    title: , <br>
-                    genre: , <br>
-                    director: , <br>
-                    description: , <br>
-                    image URL: , <br>
-                    featured:  <br>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <td>Return data about a genre (description) by name/title (e.g., "Thriller")</td>
-                <td>/movies/genre/[name]</td>
-                <td>GET</td>
-                <td>:name</td>
-                <td>None</td>
-                <td>A JSON object holding data about a genre, containing a description. <br>
-                    { <br>
-                        Name: , <br>
-                        Description: , <br>
-                        }
-                </td>
-            </tr>
-            <tr>
-                <td>Return data about a director (bio, birth year, death year) by name</td>
-                <td>/movies/director/[name]</td>
-                <td>GET</td>
-                <td>:name</td>
-                <td>None</td>
-                <td>A JSON object holding data about a director, containing bio, birth year, and death year. <br>
-                    { <br>
-                        Name: , <br>
-                        Bio: , <br>
-                        Birth year: , <br>
-                        Death year: , <br>
-                        }
-                </td>
-            </tr>
-            <tr>
                 <td>Allow new users to register</td>
-                <td>/users</td>
+                <td class="center">/users</td>
                 <td>POST</td>
                 <td>None</td>
-                <td>A JSON object with user information.
+                <td class="left">A JSON object with user information.
                     { <br>
-                        Username: , <br>
-                        Password: , <br>
-                        Email: , <br>
-                        BirthDate: , <br>
+                        "username": , <br>
+                        "password": , <br>
+                        "email": , <br>
+                        "birthDate": , <br>
                         }
                 </td>
-                <td>A text message indicating the user has been registered.<br>
+                <td class="left">A text message indicating the user has been registered.<br>
                     { <br>
-                        Username: , <br>
-                        Password: , <br>
-                        Email: , <br>
-                        BirthDate: , <br>
+                        "username": , <br>
+                        "password": , <br>
+                        "email": , <br>
+                        "birthDate": , <br>
                         }    
                 </td>
             </tr>
             <tr>
-                <td>Allow users to update their user info (username)</td>
-                <td>/users/[username]</td>
-                <td>PUT</td>
-                <td>:Username</td>
-                <td>JSON object<br>
+                <td>Login and Authenticate User
+                    <br>
+                    <br>
+                    Gets Bearer Token
+                </td>
+                <td class="center">/users</td>
+                <td>:name</td>
+                <td>None</td>
+                <td>None</td>
+                <td class="left">A JSON holding data about all the movies <br>
                     { <br>
-                        Username: , <br>
-                        Password: , <br>
-                        Email: , <br>
-                        BirthDate: , <br>
+                        "title": , <br>
+                        "genre": , <br>
+                        "director": , <br>
+                        "description": , <br>
+                        "image URL": , <br>
+                        "featured":  <br>
+                        }
+                </td>
+            </tr>
+            <tr>
+                <td>Return a list of ALL movies to the user
+                    <br>
+                    <br>
+                    Needs Bearer Token
+                </td>
+                <td class="center">/movies</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>None</td>
+                <td class="left">A JSON holding data about all the movies <br>
+                    { <br>
+                        "title": , <br>
+                        "genre": , <br>
+                        "director": , <br>
+                        "description": , <br>
+                        "image URL": , <br>
+                        "featured":  <br>
+                        }
+                </td>
+            </tr>
+            <tr>
+                <td>Return data (description, genre, director, image URL, whether it's featured or not) about a single movie by title to the user
+                    <br>
+                    <br>
+                    Needs Bearer Token
+                </td>
+                <td class="center">/movies/[title]</td>
+                <td>GET</td>
+                <td>:title</td>
+                <td>None</td>
+                <td class="left">A JSON object holding data about a single movie, containing a description, genre, director, image URL, and if it's featured. Ex: <br>
+                    { <br>
+                    "title": , <br>
+                    "genre": , <br>
+                    "director": , <br>
+                    "description": , <br>
+                    "image URL": , <br>
+                    "featured":  <br>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Return data about a genre (description) by name/title (e.g., "Thriller")
+                    <br>
+                    <br>
+                    Needs Bearer Token
+                </td>
+                <td class="center">/movies/genre/[name]</td>
+                <td>GET</td>
+                <td>:name</td>
+                <td>None</td>
+                <td class="left">A JSON object holding data about a genre, containing a description. <br>
+                    { <br>
+                        "name": , <br>
+                        "description": , <br>
+                        }
+                </td>
+            </tr>
+            <tr>
+                <td>Return data about a director (bio, birth year, death year) by name
+                    <br>
+                    <br>
+                    Needs Bearer Token
+                </td>
+                <td class="center">/movies/director/[name]</td>
+                <td>GET</td>
+                <td>:name</td>
+                <td>None</td>
+                <td class="left">A JSON object holding data about a director, containing bio, birth year, and death year. <br>
+                    { <br>
+                        "name": , <br>
+                        "bio": , <br>
+                        "birth year": , <br>
+                        "death year": , <br>
+                        }
+                </td>
+            </tr>
+
+            <tr>
+                <td>Allow users to update their user info (username)
+                    <br>
+                    <br>
+                    Needs Bearer Token
+                </td>
+                <td class="center">/users/[username]</td>
+                <td>PUT</td>
+                <td>:username</td>
+                <td class="left">JSON object<br>
+                    { <br>
+                        "username": , <br>
+                        "password": , <br>
+                        "email": , <br>
+                        "birthDate": , <br>
                         }
                 </td>
                 <td>A JSON object showing updated data</td>
             </tr>
             <tr>
-                <td>Allow users to add a movie to their list of favorites</td>
-                <td>/users/[username]/Movies/[movie]</td>
+                <td>Allow users to add a movie to their list of favorites
+                    <br>
+                    <br>
+                    Needs Bearer Token
+                </td>
+                <td class="center">/users/[username]/Movies/[movie]</td>
                 <td>POST</td>
                 <td>:Username, :Movie</td>
                 <td>Movie name</td>
                 <td>A text message saying whether the movie has been added.</td>
             </tr>
             <tr>
-                <td>Allow users to remove a movie from their list of favorites</td>
-                <td>/users/[username]/Movies/remove/[movie]</td>
+                <td>Allow users to remove a movie from their list of favorites
+                    <br>
+                    <br>
+                    Needs Bearer Token
+                </td>
+                <td class="center">/users/[username]/Movies/remove/[movie]</td>
                 <td>POST</td>
-                <td>:Username, :Movie</td>
+                <td>:username, :movie</td>
                 <td>None</td>
                 <td>A text message saying whether the movie was successfully removed</td>
             </tr>
             <tr>
-                <td>Allow existing users to deregister</td>
-                <td>/users/[Username]</td>
+                <td>Allow existing users to deregister
+                    <br>
+                    <br>
+                    Needs Bearer Token
+                </td>
+                <td class="center">/users/[Username]</td>
                 <td>DELETE</td>
                 <td>:username</td>
                 <td>None</td>
