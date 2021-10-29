@@ -318,7 +318,7 @@ app.post('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', { sess
 /**
  * Removes movie from favorite list
  * @method POST
- * @param {string} endpoint - "url/user/:Username/movies/remove/"
+ * @param {string} endpoint - "url/user/:Username/Movies/remove/"
  * @param {string} username
  * @param {number} movieID
  */
