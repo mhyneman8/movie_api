@@ -7,6 +7,11 @@ The server-side componenet of a 'movies' web applicatoin. This API stores inform
 
 - [@MalloryHyneman](https://www.github.com/mhyneman8)
 
+
+## Documentation
+
+[Documentation](https://myflix788.herokuapp.com/documentation)
+
   
 ## Features
 
@@ -28,10 +33,6 @@ The server-side componenet of a 'movies' web applicatoin. This API stores inform
 
 **Server:** Node, Express, NoSQL, MongoDB, Mongoose, HTTP authentication, JWT authentication
 
-  
-## Documentation
-
-[Documentation](https://myflix788.herokuapp.com/documentation)
 
 ## Dependencies
 - bcrypt
