@@ -22,13 +22,14 @@ let movieSchema = mongoose.Schema({
     Featured: Boolean
 });
 
-const bcrypt = require('bcrypt');
+
 
 /**
  * Defines the schema for the users collection that was created in MongoDB.
  * To add a new user, the username, password, and email is required and must be a string.
  * Favorite Movies contains an array of IDs which refer to the document within the dm.movies collection
  */
+const bcrypt = require('bcrypt');
 
 let userSchema = mongoose.Schema({
     Username: {type: String, required: true},
